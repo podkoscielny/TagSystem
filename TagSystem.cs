@@ -12,13 +12,10 @@ namespace AoOkami.MultipleTagSystem
         public enum Tags
         {
             None = 0,
-            Tile = 1,
-            SpecialTile = 2,
-            MatchEffect = 3,
-            BombEffect = 4
+            Example = 1
         }
 
-        private static Dictionary<Tags, List<GameObject>> TaggedObjects = new Dictionary<Tags, List<GameObject>>();
+        private static Dictionary<Tags, List<GameObject>> _taggedObjects = new Dictionary<Tags, List<GameObject>>();
         private static Dictionary<Tags, ReadOnlyCollection<GameObject>> _readonlyObjects = new Dictionary<Tags, ReadOnlyCollection<GameObject>>();
 
         private static ReadOnlyCollection<GameObject> _emptyList = new List<GameObject>().AsReadOnly();
@@ -30,43 +27,33 @@ namespace AoOkami.MultipleTagSystem
 
         public static GameObject FindGameObjectWithTag(Tags tag)
         {
-            if (!TaggedObjects.ContainsKey(tag) || TaggedObjects[tag].Count < 1) return null;
+            if (!_taggedObjects.ContainsKey(tag) || _taggedObjects[tag].Count < 1) return null;
 
-            return TaggedObjects[tag][0];
+            return _taggedObjects[tag][0];
         }
 
         public static ReadOnlyCollection<GameObject> FindAllGameObjectsWithTag(Tags tag)
         {
-            if (!TaggedObjects.ContainsKey(tag) || TaggedObjects[tag].Count < 1) return _emptyList;
+            if (!_taggedObjects.ContainsKey(tag) || _taggedObjects[tag].Count < 1) return _emptyList;
 
             return _readonlyObjects[tag];
         }
 
-        public static void CacheObjectToTagSystem(this TagManager tagManager, GameObject gameObjectToCache, List<Tags> tags)
+        internal static void CacheObjectToTagSystem(this TagManager tagManager, GameObject objectToBeCached, List<Tags> tags)
         {
-            CacheObjectToFindWithTag(gameObjectToCache, tags);
-        }
-
-        public static void RemoveObjectFromTagSystem(this TagManager tagManager, GameObject objectToBeRemoved, List<Tags> tags)
-        {
-            RemoveObjectFromFindWithTag(objectToBeRemoved, tags);
-        }
-
-        private static void CacheObjectToFindWithTag(GameObject objectToCache, List<Tags> tags)
-        {
-            foreach (var item in TaggedObjects)
+            foreach (var item in _taggedObjects)
             {
                 if (tags.Contains(item.Key) && item.Key != Tags.None)
-                    TaggedObjects[item.Key].Add(objectToCache);
+                    _taggedObjects[item.Key].Add(objectToBeCached);
             }
         }
 
-        private static void RemoveObjectFromFindWithTag(GameObject objectToBeRemoved, List<Tags> tags)
+        internal static void RemoveObjectFromTagSystem(this TagManager tagManager, GameObject objectToBeRemoved, List<Tags> tags)
         {
-            foreach (var item in TaggedObjects)
+            foreach (var item in _taggedObjects)
             {
                 if (tags.Contains(item.Key))
-                    TaggedObjects[item.Key].Remove(objectToBeRemoved);
+                    _taggedObjects[item.Key].Remove(objectToBeRemoved);
             }
         }
 
@@ -77,10 +64,10 @@ namespace AoOkami.MultipleTagSystem
 
             foreach (var value in enumValues)
             {
-                TaggedObjects.Add((Tags)value, new List<GameObject>());
+                _taggedObjects.Add((Tags)value, new List<GameObject>());
             }
 
-            foreach (var item in TaggedObjects)
+            foreach (var item in _taggedObjects)
             {
                 _readonlyObjects.Add(item.Key, item.Value.AsReadOnly());
             }

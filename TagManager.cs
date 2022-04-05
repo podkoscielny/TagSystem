@@ -1,4 +1,4 @@
-    using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Tags = AoOkami.MultipleTagSystem.TagSystem.Tags;
@@ -7,7 +7,7 @@ namespace AoOkami.MultipleTagSystem
 {
     public class TagManager : MonoBehaviour
     {
-        [SerializeField] List<Tags> tags;
+        [SerializeField] List<Tags> tags = new List<Tags>();
 
         private void OnEnable() => this.CacheObjectToTagSystem(gameObject, tags);
 
