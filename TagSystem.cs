@@ -12,7 +12,8 @@ namespace AoOkami.MultipleTagSystem
         public enum Tags
         {
             None = 0,
-            Example = 1
+            Example = 1,
+            Test = 2
         }
 
         private static Dictionary<Tags, List<GameObject>> _taggedObjects = new Dictionary<Tags, List<GameObject>>();
@@ -39,7 +40,7 @@ namespace AoOkami.MultipleTagSystem
             return _readonlyObjects[tag];
         }
 
-        internal static void CacheObjectToTagSystem(this TagManager tagManager, GameObject objectToBeCached, List<Tags> tags)
+        internal static void CacheObjectToTagSystem(GameObject objectToBeCached, List<Tags> tags)
         {
             foreach (var item in _taggedObjects)
             {
@@ -48,7 +49,7 @@ namespace AoOkami.MultipleTagSystem
             }
         }
 
-        internal static void RemoveObjectFromTagSystem(this TagManager tagManager, GameObject objectToBeRemoved, List<Tags> tags)
+        internal static void RemoveObjectFromTagSystem(GameObject objectToBeRemoved, List<Tags> tags)
         {
             foreach (var item in _taggedObjects)
             {
@@ -56,6 +57,10 @@ namespace AoOkami.MultipleTagSystem
                     _taggedObjects[item.Key].Remove(objectToBeRemoved);
             }
         }
+
+        internal static void CacheObjectToNewTag(GameObject objectToBeCached, Tags tag) => _taggedObjects[tag].Add(objectToBeCached);
+
+        internal static void RemoveTagFromObject(GameObject objectToBeRemoved, Tags tag) => _taggedObjects[tag].Remove(objectToBeRemoved);
 
         private static void InitializeTaggedObjectsDictionary()
         {
