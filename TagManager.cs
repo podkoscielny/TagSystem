@@ -9,11 +9,13 @@ namespace AoOkami.MultipleTagSystem
     {
         [SerializeField] List<Tags> tags = new List<Tags>();
 
-        private void OnEnable() => TagSystem.CacheObjectToTagSystem(gameObject, tags);
+        private void OnEnable()
+        {
+            RemoveDuplicatesFromTags();
+            TagSystem.CacheObjectToTagSystem(gameObject, tags);
+        }
 
         private void OnDisable() => TagSystem.RemoveObjectFromTagSystem(gameObject, tags);
-
-        private void OnValidate() => PreventFromDuplicatingTags();
 
         public bool HasTag(Tags tag) => tags.Contains(tag);
 
@@ -28,22 +30,18 @@ namespace AoOkami.MultipleTagSystem
         public void RemoveTag(Tags tag)
         {
             if (!tags.Contains(tag) || tag == Tags.None) return;
-            
+
             tags.Remove(tag);
             TagSystem.RemoveTagFromObject(gameObject, tag);
         }
 
-        private void PreventFromDuplicatingTags()
+        private void RemoveDuplicatesFromTags()
         {
             List<Tags> tagsWithoutDuplicates = new List<Tags>();
 
             foreach (Tags tag in tags)
             {
-                if (tagsWithoutDuplicates.Contains(tag))
-                {
-                    tagsWithoutDuplicates.Add(Tags.None);
-                    continue;
-                }
+                if (tagsWithoutDuplicates.Contains(tag)) continue;
 
                 tagsWithoutDuplicates.Add(tag);
             }
