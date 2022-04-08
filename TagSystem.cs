@@ -11,9 +11,8 @@ namespace AoOkami.MultipleTagSystem
         [Serializable]
         public enum Tags
         {
-            None = 0,
-            Example = 1,
-            Test = 2
+            Example = 0,
+            Test = 1
         }
 
         private static Dictionary<Tags, List<GameObject>> _taggedObjects = new Dictionary<Tags, List<GameObject>>();
@@ -44,7 +43,7 @@ namespace AoOkami.MultipleTagSystem
         {
             foreach (var item in _taggedObjects)
             {
-                if (tags.Contains(item.Key) && item.Key != Tags.None)
+                if (tags.Contains(item.Key))
                     _taggedObjects[item.Key].Add(objectToBeCached);
             }
         }

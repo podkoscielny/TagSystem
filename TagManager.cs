@@ -21,7 +21,7 @@ namespace AoOkami.MultipleTagSystem
 
         public void AddTag(Tags tag)
         {
-            if (tags.Contains(tag) || tag == Tags.None) return;
+            if (tags.Contains(tag)) return;
 
             tags.Add(tag);
             TagSystem.CacheObjectToNewTag(gameObject, tag);
@@ -29,7 +29,7 @@ namespace AoOkami.MultipleTagSystem
 
         public void RemoveTag(Tags tag)
         {
-            if (!tags.Contains(tag) || tag == Tags.None) return;
+            if (!tags.Contains(tag)) return;
 
             tags.Remove(tag);
             TagSystem.RemoveTagFromObject(gameObject, tag);
