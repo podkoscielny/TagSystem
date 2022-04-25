@@ -32,6 +32,8 @@ namespace AoOkami.MultipleTagSystem
             return _readonlyObjects[tag];
         }
 
+        internal static bool HasTag(Tags tag, GameObject gameObject) => _taggedObjects[tag].Contains(gameObject);
+
         internal static void CacheObjectToTagSystem(GameObject objectToBeCached, List<Tags> tags)
         {
             foreach (var item in _taggedObjects)

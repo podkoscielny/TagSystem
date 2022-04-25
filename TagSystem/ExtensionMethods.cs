@@ -6,40 +6,14 @@ namespace AoOkami.MultipleTagSystem
 {
     public static class ExtensionMethods
     {
-        public static bool HasTag(this GameObject gameObject, Tags tag)
-        {
-            bool hasTag = false;
+        public static bool HasTag(this GameObject gameObject, Tags tag) => TagSystem.HasTag(tag, gameObject);
 
-            if (gameObject.TryGetComponent(out TagManager tagManager))
-            {
-                hasTag = tagManager.HasTag(tag);
-            }
+        public static bool HasTag(this Collision collision, Tags tag) => TagSystem.HasTag(tag, collision.gameObject);
 
-            return hasTag;
-        }
+        public static bool HasTag(this Collider collision, Tags tag) => TagSystem.HasTag(tag, collision.gameObject);
 
-        public static bool HasTag(this Collision2D collision, Tags tag)
-        {
-            bool hasTag = false;
+        public static bool HasTag(this Collision2D collision, Tags tag) => TagSystem.HasTag(tag, collision.gameObject);
 
-            if (collision.gameObject.TryGetComponent(out TagManager tagManager))
-            {
-                hasTag = tagManager.HasTag(tag);
-            }
-
-            return hasTag;
-        }
-
-        public static bool HasTag(this Collider2D collision, Tags tag)
-        {
-            bool hasTag = false;
-
-            if (collision.TryGetComponent(out TagManager tagManager))
-            {
-                hasTag = tagManager.HasTag(tag);
-            }
-
-            return hasTag;
-        }
+        public static bool HasTag(this Collider2D collision, Tags tag) => TagSystem.HasTag(tag, collision.gameObject);
     }
 }
