@@ -8,13 +8,6 @@ namespace AoOkami.MultipleTagSystem
 {
     public static class TagSystem
     {
-        [Serializable]
-        public enum Tags
-        {
-            Example = 0,
-            Test = 1
-        }
-
         private static Dictionary<Tags, List<GameObject>> _taggedObjects = new Dictionary<Tags, List<GameObject>>();
         private static Dictionary<Tags, ReadOnlyCollection<GameObject>> _readonlyObjects = new Dictionary<Tags, ReadOnlyCollection<GameObject>>();
 
