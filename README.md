@@ -16,8 +16,7 @@ Is made to replace built in string based tag system. Easy to use, but very power
 ## Setup Guide
 
 ### Installation
-  Download the zip file and move TagSystem folder to your project 
-  or download the unity package from the Release section and import it.
+  Download the zip file and move TagSystem folder to your project.
   
   ### Usage
   
@@ -68,12 +67,12 @@ Checks if TagManager attached to GameObject has specific tag. Returns true if it
 
 #### *void* AddTag
 Add selected tag to TagManager.\
-<img src="https://user-images.githubusercontent.com/49119130/165170870-6a406e55-0b59-4a96-9123-46ad9541d4ae.png" width="550" />
+<img src="https://user-images.githubusercontent.com/49119130/165170870-6a406e55-0b59-4a96-9123-46ad9541d4ae.png" width="450" />
 
 #### *void* RemoveTag
 Remove selected tag from TagManager.\
-<img src="https://user-images.githubusercontent.com/49119130/165170915-4be5bdeb-97c4-494e-b144-35227b8ef986.png" width="550" />
+<img src="https://user-images.githubusercontent.com/49119130/165170915-4be5bdeb-97c4-494e-b144-35227b8ef986.png" width="450" />
 
 ## Performance Test
 Test performed at 100 000 iterations\
-<img src="https://user-images.githubusercontent.com/49119130/165182402-9e3f3cd3-0343-4df9-8f8b-fb10d19ffa3f.png" width="550" />
+<img src="https://user-images.githubusercontent.com/49119130/165305400-dfe4b9ce-7200-4604-912e-37ffed9430c0.png" width="550" />
