@@ -16,7 +16,7 @@ namespace AoOkami.MultipleTagSystem
 
         private void OnDisable() => TagSystem.RemoveObjectFromTagSystem(gameObject, tags);
 
-        public bool HasTag(Tags tag) => tags.Contains(tag);
+        public bool HasTag(Tags tag) => TagSystem.HasTag(tag, gameObject);
 
         public void AddTag(Tags tag)
         {
